@@ -5,9 +5,11 @@ body, button, input, textarea, select {
 
 a {
   text-decoration: none;
+  outline: none;
 
   &:hover {
     text-decoration: underline;
+    outline: none;
   }
 }
 

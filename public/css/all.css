@@ -44,9 +44,11 @@ body, button, input, textarea, select {
   -moz-osx-font-smoothing: grayscale; }
 
 a {
-  text-decoration: none; }
+  text-decoration: none;
+  outline: none; }
   a:hover {
-    text-decoration: underline; }
+    text-decoration: underline;
+    outline: none; }
 
 select {
   cursor: pointer; }
@@ -547,7 +549,16 @@ h2 {
         -webkit-animation-fill-mode: forwards;
                 animation-fill-mode: forwards; }
   .commonPage aside {
-    overflow: hidden; }
+    width: calc(100% - 450px);
+    position: absolute;
+    top: 0;
+    right: 0; }
+    .commonPage aside .slick-slide {
+      margin-top: 20px;
+      outline: none; }
+      .commonPage aside .slick-slide img {
+        margin: 0 auto;
+        max-height: calc(100vh - 250px); }
   .commonPage.pageColors {
     color: #222; }
     .commonPage.pageColors h3 {
@@ -725,15 +736,13 @@ body.projectOpened {
   body.projectOpened #project {
     pointer-events: auto;
     width: 100vw;
+    height: 100vh;
     overflow: auto; }
     body.projectOpened #project .pageBody {
       position: relative;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 350px auto;
-      grid-gap: 60px; }
+      width: 100%; }
     body.projectOpened #project main {
-      flex-basis: 350px; }
+      width: 350px; }
 
 #filters {
   position: absolute;
@@ -786,3 +795,16 @@ a {
     top: 50px; }
   .workItem.hidden {
     display: none; }
+
+.thumbs {
+  margin-top: 30px;
+  width: 350px; }
+  .thumbs img {
+    width: 100%; }
+  .thumbs .slick-slide {
+    padding-bottom: 3px;
+    margin-right: 6px;
+    border-bottom: solid 3px rgba(255, 255, 255, 0);
+    outline: none; }
+  .thumbs .slick-current {
+    border-bottom: solid 3px white; }

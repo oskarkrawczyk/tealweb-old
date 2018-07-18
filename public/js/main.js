@@ -286,7 +286,8 @@ class Teal {
       slidesToScroll: 1,
       arrows: true,
       fade: true,
-      asNavFor: '.slider-nav'
+      asNavFor: '.slider-nav',
+      respondTo: 'slider'
     })
   }
 
