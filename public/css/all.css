@@ -468,13 +468,16 @@ h2 {
                     animation-iteration-count: 1;
             -webkit-animation-fill-mode: forwards;
                     animation-fill-mode: forwards; }
-  .commonPage .info p {
-    line-height: 1.7em;
-    margin-bottom: 15px;
-    color: rgba(255, 255, 255, 0);
-    pointer-events: none;
-    position: relative;
-    padding: 3px 0; }
+  .commonPage .info {
+    max-height: calc(100vh - 500px);
+    overflow: auto; }
+    .commonPage .info p {
+      line-height: 1.7em;
+      margin-bottom: 15px;
+      color: rgba(255, 255, 255, 0);
+      pointer-events: none;
+      position: relative;
+      padding: 3px 0; }
 
 @-webkit-keyframes paintText_pageinfo {
   0% {
@@ -523,33 +526,33 @@ h2 {
     color: white; }
   100% {
     color: white; } }
-    .commonPage .info p::after {
-      display: block;
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      content: "";
-      width: 0%;
-      background: #ffffff; }
-    .commonPage .info p.show {
-      color: #ffffff;
-      pointer-events: auto;
-      -webkit-animation: showText_pageinfo ease 0.6s;
-              animation: showText_pageinfo ease 0.6s;
-      -webkit-animation-iteration-count: 1;
-              animation-iteration-count: 1;
-      -webkit-animation-fill-mode: forwards;
-              animation-fill-mode: forwards; }
-      .commonPage .info p.show::after {
-        -webkit-animation: paintText_pageinfo ease 0.6s;
-                animation: paintText_pageinfo ease 0.6s;
+      .commonPage .info p::after {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        content: "";
+        width: 0%;
+        background: #ffffff; }
+      .commonPage .info p.show {
+        color: #ffffff;
+        pointer-events: auto;
+        -webkit-animation: showText_pageinfo ease 0.6s;
+                animation: showText_pageinfo ease 0.6s;
         -webkit-animation-iteration-count: 1;
                 animation-iteration-count: 1;
         -webkit-animation-fill-mode: forwards;
                 animation-fill-mode: forwards; }
-  .commonPage .info .credits {
-    font-size: 12px; }
+        .commonPage .info p.show::after {
+          -webkit-animation: paintText_pageinfo ease 0.6s;
+                  animation: paintText_pageinfo ease 0.6s;
+          -webkit-animation-iteration-count: 1;
+                  animation-iteration-count: 1;
+          -webkit-animation-fill-mode: forwards;
+                  animation-fill-mode: forwards; }
+    .commonPage .info .credits {
+      font-size: 12px; }
   .commonPage aside {
     width: calc(100% - 450px);
     position: absolute;
@@ -560,7 +563,8 @@ h2 {
       outline: none; }
       .commonPage aside .slick-slide img {
         margin: 0 auto;
-        max-height: calc(100vh - 250px); }
+        max-height: calc(100vh - 250px);
+        max-width: 95%; }
   .commonPage.pageColors {
     color: #222; }
     .commonPage.pageColors h3 {
@@ -726,11 +730,19 @@ h2 {
           -webkit-animation-fill-mode: forwards;
                   animation-fill-mode: forwards; }
 
+#project .pageBody {
+  position: relative;
+  width: 100%; }
+
+#project main {
+  width: 350px; }
+
 body.pageOpened {
   overflow: hidden; }
   body.pageOpened #page {
     pointer-events: auto;
     width: 100vw;
+    height: 100vh;
     overflow: auto; }
 
 body.projectOpened {
@@ -740,11 +752,6 @@ body.projectOpened {
     width: 100vw;
     height: 100vh;
     overflow: auto; }
-    body.projectOpened #project .pageBody {
-      position: relative;
-      width: 100%; }
-    body.projectOpened #project main {
-      width: 350px; }
 
 #filters {
   position: absolute;

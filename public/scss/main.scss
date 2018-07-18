@@ -216,6 +216,9 @@ h2 {
   }
 
   .info {
+    max-height: calc(100vh - 500px);
+    overflow: auto;
+
     p {
       line-height: 1.7em;
       margin-bottom: 15px;
@@ -240,6 +243,7 @@ h2 {
       img {
         margin: 0 auto;
         max-height: calc(100vh - 250px);
+        max-width: 95%;
       }
     }
   }
@@ -275,15 +279,26 @@ h2 {
   } // .pageColors
 }
 
+#project {
+  .pageBody {
+    position: relative;
+    width: 100%;
+  }
+
+  main {
+    width: 350px;
+  }
+}
+
 body.pageOpened {
   overflow: hidden;
 
   #page {
     pointer-events: auto;
     width: 100vw;
+    height: 100vh;
     overflow: auto;
   }
-
 }
 
 body.projectOpened {
@@ -294,15 +309,6 @@ body.projectOpened {
     width: 100vw;
     height: 100vh;
     overflow: auto;
-
-    .pageBody {
-      position: relative;
-      width: 100%;
-    }
-
-    main {
-      width: 350px;
-    }
   }
 }
 
@@ -410,4 +416,3 @@ a {
     border-bottom: solid 3px rgba(#fff, 1);
   }
 }
-
