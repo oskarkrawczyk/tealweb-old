@@ -548,6 +548,8 @@ h2 {
                 animation-iteration-count: 1;
         -webkit-animation-fill-mode: forwards;
                 animation-fill-mode: forwards; }
+  .commonPage .info .credits {
+    font-size: 12px; }
   .commonPage aside {
     width: calc(100% - 450px);
     position: absolute;

@@ -221,6 +221,10 @@ h2 {
       margin-bottom: 15px;
       @include marker(#ffffff, "pageinfo", 3);
     }
+
+    .credits {
+      font-size: 12px;
+    }
   }
 
   aside {
@@ -232,7 +236,7 @@ h2 {
     .slick-slide {
       margin-top: 20px;
       outline: none;
-      
+
       img {
         margin: 0 auto;
         max-height: calc(100vh - 250px);
