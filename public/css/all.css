@@ -792,8 +792,9 @@ body.projectOpened {
     #filters li.inactive {
       opacity: 0.2; }
 
-#our-recent-work {
-  margin-bottom: 100px; }
+#our-recent-work,
+#our-work {
+  padding-bottom: 100px; }
 
 .workList {
   display: grid;
