@@ -57,8 +57,8 @@ class Teal {
   }
 
   setDefaultPage(){
-    if (document.location.hash.indexOf("#/") >= 0){
-      let slug = document.location.hash.split("#/")[1]
+    if (document.location.hash.indexOf("#!/") >= 0){
+      let slug = document.location.hash.split("#!/")[1]
       this.fetchPage(document.querySelector(`[data-page="${slug}"]`))
     }
   }
@@ -139,7 +139,9 @@ class Teal {
 
         this.showPage(trigger, filter)
 
-        history.pushState({}, title, `#/${page}`)
+        history.pushState({
+          page: page
+        }, title, `#!/${page}`)
       })
       .catch(error => {
         console.log("Well shucks:", error)
@@ -155,20 +157,27 @@ class Teal {
     // change page colors based on the project image
     if (pageImage){
       let imageSrc = pageImage.src
+      let lightAccent
 
-      // this.page.classList.remove("pageColors")
       Vibrant.from(pageImage).getPalette((err, palette) => {
         this.project.style.background = palette.DarkMuted.getHex()
-        this.project.querySelector(".pageHeader .back").style.stroke = palette.LightMuted.getHex()
-        this.project.querySelector(".pageHeader .logo").style.fill = palette.LightMuted.getHex()
-        this.project.querySelector(".spacer").style.stroke = palette.LightMuted.getHex()
+
+        // some images don't havve a LightMuted palette so we fall back to vibrant
+        if (palette.LightMuted) {
+          lightAccent = palette.LightMuted.getHex()
+        } else {
+          lightAccent = palette.LightVibrant.getHex()
+        }
+
+        this.project.querySelector(".pageHeader .back").style.stroke = lightAccent
+        this.project.querySelector(".pageHeader .logo").style.fill   = lightAccent
+        this.project.querySelector(".spacer").style.stroke           = lightAccent
       })
     } else {
       this.page.style.background = "#fff"
       this.page.querySelector(".pageHeader .back").style.stroke = "#27A0BF"
-      this.page.querySelector(".pageHeader .logo").style.fill = "#27A0BF"
-      this.page.querySelector(".spacer").style.stroke = "#F2F2F2"
-      // this.page.classList.add("pageColors")
+      this.page.querySelector(".pageHeader .logo").style.fill   = "#27A0BF"
+      this.page.querySelector(".spacer").style.stroke           = "#F2F2F2"
     }
   }
 
@@ -243,7 +252,9 @@ class Teal {
         workItem.classList.remove("hidden")
       })
 
-      history.pushState({}, "title", `#/our-work`)
+      history.pushState({
+        page: "our-work"
+      }, "title", `#!/our-work`)
     } else {
 
       // disable filtres
@@ -264,7 +275,9 @@ class Teal {
         }
       })
 
-      history.pushState({}, "title", `#/our-work/${filter}`)
+      history.pushState({
+        page: filter
+      }, "title", `#!/our-work/${filter}`)
     }
   }
 
@@ -305,7 +318,9 @@ class Teal {
     Array.from(items).forEach((item) => {
       item.classList.remove("show")
     })
-    history.pushState({}, "Project", "/")
+    history.pushState({
+      page: ""
+    }, "Project", "/")
   }
 
   toggleClass(item, index){
