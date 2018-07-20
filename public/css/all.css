@@ -270,6 +270,29 @@ h2 {
 #brands li {
   padding: 40px 0; }
 
+#contact {
+  padding: 40px 0 70px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 60px;
+  color: rgba(34, 34, 34, 0.4); }
+  #contact section {
+    line-height: 1.65em; }
+    #contact section h4 {
+      font-weight: 600;
+      margin-bottom: 10px; }
+    #contact section a {
+      color: rgba(34, 34, 34, 0.4); }
+      #contact section a:hover {
+        text-decoration: underline; }
+    #contact section svg {
+      stroke: rgba(34, 34, 34, 0.4);
+      height: 15px;
+      margin-right: 7px;
+      position: relative;
+      top: -1px;
+      vertical-align: middle; }
+
 .commonPage {
   position: fixed;
   top: 0;
