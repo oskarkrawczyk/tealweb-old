@@ -451,3 +451,39 @@ a {
     border-bottom: solid 3px rgba(#fff, 1);
   }
 }
+
+.aboutUsCont {
+  padding-bottom: 80px;
+
+  h3 {
+    font-size: 40px;
+    width: 40%;
+  }
+
+  section {
+    color: #222;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-gap: 60px;
+  }
+
+  h4 {
+    color: #27A0BF;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.45em;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 15px;
+    line-height: 1.55em;
+    margin-bottom: 12px;
+  }
+
+  img {
+    margin-top: 50px;
+    width: 100%;
+    // clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 90%);
+  }
+}
