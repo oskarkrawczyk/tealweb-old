@@ -282,8 +282,6 @@ class Teal {
   }
 
   initSlider(){
-    // console.log($('.slider-for'))
-
     $('.slider-nav').slick({
       slidesToShow: 3,
       slidesToScroll: 1,
