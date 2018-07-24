@@ -265,7 +265,9 @@ h2 {
 #brands ul {
   display: flex;
   align-items: center;
-  justify-content: space-between; }
+  justify-content: space-between;
+  max-width: 950px;
+  margin: 0 auto; }
 
 #brands li {
   padding: 40px 0; }
