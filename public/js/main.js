@@ -141,7 +141,7 @@ class Teal {
 
         history.pushState({
           page: page
-        }, title, `#!/${page}`)
+        }, `teal. &minus; ${title}`, `#!/${page}`)
       })
       .catch(error => {
         console.log("Well shucks:", error)
@@ -254,7 +254,7 @@ class Teal {
 
       history.pushState({
         page: "our-work"
-      }, "title", `#!/our-work`)
+      }, "teal. &minus; Creative studio from Warsaw. Production, Events, PR", `#!/our-work`)
     } else {
 
       // disable filtres
@@ -277,7 +277,7 @@ class Teal {
 
       history.pushState({
         page: filter
-      }, "title", `#!/our-work/${filter}`)
+      }, "teal. &minus; Creative studio from Warsaw. Production, Events, PR", `#!/our-work/${filter}`)
     }
   }
 
