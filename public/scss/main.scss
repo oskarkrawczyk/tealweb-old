@@ -7,7 +7,7 @@ body {
   font-size: 14px;
 }
 
-header {
+header.site {
   // background: gray;
   margin: 20px 20px 0 0;
   position: relative;
@@ -238,17 +238,20 @@ h2 {
     color: #fff;
   }
 
+  header {
+  }
+
   h3 {
     font-size: 30px;
     font-weight: 600;
-    line-height: 1.35em;
+    line-height: 1.15em;
     letter-spacing: -2px;
     display: inline-block;
     @include marker(#fff, "pagetitle", 0);
   }
 
   .meta {
-    margin: 15px 0 30px;
+    margin: 15px 0 0;
 
     li {
       margin-bottom: 5px;
@@ -261,13 +264,18 @@ h2 {
   }
 
   .info {
-    max-height: calc(100vh - 500px);
     overflow: auto;
 
     p {
       line-height: 1.7em;
       margin-bottom: 15px;
       @include marker(#ffffff, "pageinfo", 3);
+    }
+
+    ul {
+      line-height: 1.7em;
+      margin-bottom: 15px;
+      @include marker(#ffffff, "pagelist", 3);
     }
 
     .credits {
@@ -320,6 +328,10 @@ h2 {
       p {
         @include marker(#222, "pageinfo_alt", 3);
       }
+
+      ul {
+        @include marker(#222, "pagelist_alt", 3);
+      }
     }
   } // .pageColors
 }
@@ -332,6 +344,10 @@ h2 {
 
   main {
     width: 350px;
+    height: calc(100vh - 230px);
+    display: grid;
+    grid-row-gap: 20px;
+    grid-template-rows: auto 1fr 118px;
   }
 }
 
@@ -418,6 +434,7 @@ a {
     margin: 15px 0 10px;
     color: #222;
     letter-spacing: 0;
+    line-height: 1.2em;
 
     // span {
     //   @include marker(#222, "worktitle", 0);
@@ -444,7 +461,7 @@ a {
 } // .workItem
 
 .thumbs {
-  margin-top: 30px;
+  // margin-top: 30px;
   width: 350px;
 
   img {

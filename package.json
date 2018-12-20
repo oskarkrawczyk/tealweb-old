@@ -3,8 +3,7 @@
   "version": "1.0.1",
   "scripts": {
     "start": "gulp watch",
-    "gulp": "gulp",
-    "gallery": "convert -scene 1 -define jpeg:size=440x440 source/*.jpg -thumbnail 220x220^ -gravity center -extent 220x220 -quality 100 thumbs/%d.jpg && convert source/*.jpg -scene 1 -resize 1024x1024\> -quality 95 slides/%d.jpg && convert source/*.jpg -scene 1 -resize 1920x1920\> -quality 95 source/%d.jpg"
+    "gulp": "gulp"
   },
   "dependencies": {
     "browser-sync": "latest",

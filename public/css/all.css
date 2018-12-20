@@ -90,14 +90,14 @@ body {
   font-family: "Graphik Web", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
   font-size: 14px; }
 
-header {
+header.site {
   margin: 20px 20px 0 0;
   position: relative;
   height: 100vh;
   overflow: hidden;
   -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 90%);
           clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 90%); }
-  header video {
+  header.site video {
     position: absolute;
     top: 0;
     left: 0;
@@ -340,7 +340,7 @@ h2 {
   .commonPage h3 {
     font-size: 30px;
     font-weight: 600;
-    line-height: 1.35em;
+    line-height: 1.15em;
     letter-spacing: -2px;
     display: inline-block;
     color: rgba(255, 255, 255, 0);
@@ -421,7 +421,7 @@ h2 {
         -webkit-animation-fill-mode: forwards;
                 animation-fill-mode: forwards; }
   .commonPage .meta {
-    margin: 15px 0 30px; }
+    margin: 15px 0 0; }
     .commonPage .meta li {
       margin-bottom: 5px; }
       .commonPage .meta li span {
@@ -504,7 +504,6 @@ h2 {
             -webkit-animation-fill-mode: forwards;
                     animation-fill-mode: forwards; }
   .commonPage .info {
-    max-height: calc(100vh - 500px);
     overflow: auto; }
     .commonPage .info p {
       line-height: 1.7em;
@@ -582,6 +581,86 @@ h2 {
         .commonPage .info p.show::after {
           -webkit-animation: paintText_pageinfo ease 0.6s;
                   animation: paintText_pageinfo ease 0.6s;
+          -webkit-animation-iteration-count: 1;
+                  animation-iteration-count: 1;
+          -webkit-animation-fill-mode: forwards;
+                  animation-fill-mode: forwards; }
+    .commonPage .info ul {
+      line-height: 1.7em;
+      margin-bottom: 15px;
+      color: rgba(255, 255, 255, 0);
+      pointer-events: none;
+      position: relative;
+      padding: 3px 0; }
+
+@-webkit-keyframes paintText_pagelist {
+  0% {
+    left: 0;
+    width: 0%; }
+  35% {
+    left: 0;
+    width: 100%; }
+  65% {
+    left: 0;
+    width: 100%; }
+  100% {
+    left: 100%;
+    width: 0%; } }
+
+@keyframes paintText_pagelist {
+  0% {
+    left: 0;
+    width: 0%; }
+  35% {
+    left: 0;
+    width: 100%; }
+  65% {
+    left: 0;
+    width: 100%; }
+  100% {
+    left: 100%;
+    width: 0%; } }
+
+@-webkit-keyframes showText_pagelist {
+  0% {
+    color: rgba(255, 255, 255, 0); }
+  30% {
+    color: rgba(255, 255, 255, 0); }
+  70% {
+    color: white; }
+  100% {
+    color: white; } }
+
+@keyframes showText_pagelist {
+  0% {
+    color: rgba(255, 255, 255, 0); }
+  30% {
+    color: rgba(255, 255, 255, 0); }
+  70% {
+    color: white; }
+  100% {
+    color: white; } }
+      .commonPage .info ul::after {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        content: "";
+        width: 0%;
+        background: #ffffff; }
+      .commonPage .info ul.show {
+        color: #ffffff;
+        pointer-events: auto;
+        -webkit-animation: showText_pagelist ease 0.6s;
+                animation: showText_pagelist ease 0.6s;
+        -webkit-animation-iteration-count: 1;
+                animation-iteration-count: 1;
+        -webkit-animation-fill-mode: forwards;
+                animation-fill-mode: forwards; }
+        .commonPage .info ul.show::after {
+          -webkit-animation: paintText_pagelist ease 0.6s;
+                  animation: paintText_pagelist ease 0.6s;
           -webkit-animation-iteration-count: 1;
                   animation-iteration-count: 1;
           -webkit-animation-fill-mode: forwards;
@@ -764,13 +843,95 @@ h2 {
                   animation-iteration-count: 1;
           -webkit-animation-fill-mode: forwards;
                   animation-fill-mode: forwards; }
+    .commonPage.pageColors .info ul {
+      color: rgba(34, 34, 34, 0);
+      pointer-events: none;
+      position: relative;
+      padding: 3px 0; }
+
+@-webkit-keyframes paintText_pagelist_alt {
+  0% {
+    left: 0;
+    width: 0%; }
+  35% {
+    left: 0;
+    width: 100%; }
+  65% {
+    left: 0;
+    width: 100%; }
+  100% {
+    left: 100%;
+    width: 0%; } }
+
+@keyframes paintText_pagelist_alt {
+  0% {
+    left: 0;
+    width: 0%; }
+  35% {
+    left: 0;
+    width: 100%; }
+  65% {
+    left: 0;
+    width: 100%; }
+  100% {
+    left: 100%;
+    width: 0%; } }
+
+@-webkit-keyframes showText_pagelist_alt {
+  0% {
+    color: rgba(34, 34, 34, 0); }
+  30% {
+    color: rgba(34, 34, 34, 0); }
+  70% {
+    color: #222222; }
+  100% {
+    color: #222222; } }
+
+@keyframes showText_pagelist_alt {
+  0% {
+    color: rgba(34, 34, 34, 0); }
+  30% {
+    color: rgba(34, 34, 34, 0); }
+  70% {
+    color: #222222; }
+  100% {
+    color: #222222; } }
+      .commonPage.pageColors .info ul::after {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        content: "";
+        width: 0%;
+        background: #222; }
+      .commonPage.pageColors .info ul.show {
+        color: #222;
+        pointer-events: auto;
+        -webkit-animation: showText_pagelist_alt ease 0.6s;
+                animation: showText_pagelist_alt ease 0.6s;
+        -webkit-animation-iteration-count: 1;
+                animation-iteration-count: 1;
+        -webkit-animation-fill-mode: forwards;
+                animation-fill-mode: forwards; }
+        .commonPage.pageColors .info ul.show::after {
+          -webkit-animation: paintText_pagelist_alt ease 0.6s;
+                  animation: paintText_pagelist_alt ease 0.6s;
+          -webkit-animation-iteration-count: 1;
+                  animation-iteration-count: 1;
+          -webkit-animation-fill-mode: forwards;
+                  animation-fill-mode: forwards; }
 
 #project .pageBody {
   position: relative;
   width: 100%; }
 
 #project main {
-  width: 350px; }
+  width: 350px;
+  height: calc(100vh - 230px);
+  display: grid;
+  grid-row-gap: 20px;
+  grid-template-rows: auto 1fr 118px; }
 
 body.pageOpened {
   overflow: hidden; }
@@ -831,7 +992,8 @@ a {
     font-weight: 500;
     margin: 15px 0 10px;
     color: #222;
-    letter-spacing: 0; }
+    letter-spacing: 0;
+    line-height: 1.2em; }
   .workItem ul {
     line-height: 1.45em;
     color: #aaa; }
@@ -842,7 +1004,6 @@ a {
     display: none; }
 
 .thumbs {
-  margin-top: 30px;
   width: 350px; }
   .thumbs img {
     width: 100%; }
