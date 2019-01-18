@@ -270,7 +270,9 @@ h2 {
   margin: 0 auto; }
 
 #brands li {
-  padding: 40px 0; }
+  padding: 30px 0;
+  width: 145px;
+  text-align: center; }
 
 #brands img {
   -webkit-filter: grayscale(100%);
