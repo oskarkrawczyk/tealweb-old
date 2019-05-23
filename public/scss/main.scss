@@ -389,6 +389,7 @@ a {
   background: #27A0BF;
   transform: skewY(6deg);
   z-index: 100;
+  will-change: transform, height, top;
 
   &.show {
     pointer-events: none;

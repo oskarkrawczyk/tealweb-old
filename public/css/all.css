@@ -455,7 +455,8 @@ a {
   background: #27A0BF;
   -webkit-transform: skewY(6deg);
           transform: skewY(6deg);
-  z-index: 100; }
+  z-index: 100;
+  will-change: transform, height, top; }
   #courtain.show {
     pointer-events: none;
     -webkit-animation: showCourtain ease 1s;
