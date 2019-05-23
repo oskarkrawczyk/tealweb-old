@@ -8,7 +8,7 @@ class Gallery {
 
   getRatio(image, cb){
     let tempImage = new Image()
-    tempImage.src = image.src
+    tempImage.src = image.smallSrc
     tempImage.addEventListener("load", function(){
       let ratio = this.naturalWidth / this.naturalHeight
       cb(ratio)
@@ -31,42 +31,48 @@ class Gallery {
         allRows.push(rowDiv)
 
         row.forEach((image) => {
-          let imgDiv = document.createElement("div")
-          imgDiv.setAttribute("class", "galleryImage")
+          let galleryImage = document.createElement("a")
+          galleryImage.setAttribute("class", "galleryImage")
+          galleryImage.setAttribute("href", image.largeSrc)
+          galleryImage.dataset.fslightbox = ""
 
           let img = document.createElement("img")
-          img.setAttribute("src", image.src)
+          img.setAttribute("src", image.smallSrc)
 
           this.getRatio(image, (ratio) => {
-            imgDiv.style.flex = ratio
-            imgDiv.appendChild(img)
-            rowDiv.appendChild(imgDiv)
+            galleryImage.style.flex = ratio
+            galleryImage.appendChild(img)
+            rowDiv.appendChild(galleryImage)
+
+            let script = document.createElement("script")
+            script.src = "/public/js/fslightbox.min.js"
+            document.head.appendChild(script)
           })
         })
 
         gallery.appendChild(rowDiv)
       })
 
-      let expandImagesDiv = document.createElement("div")
-      expandImagesDiv.setAttribute("class", "expandImages")
+      if (rows.length > 1){
+        let expandImagesDiv = document.createElement("div")
+        expandImagesDiv.setAttribute("class", "expandImages")
 
-      let expandImagesLink = document.createElement("a")
-      expandImagesLink.setAttribute("href", "#")
-      expandImagesLink.innerText = `Show all images`
-      expandImagesLink.addEventListener("click", function(event){
-        event.preventDefault()
-        event.stopPropagation()
+        let expandImagesLink = document.createElement("a")
+        expandImagesLink.setAttribute("href", "#")
+        expandImagesLink.innerText = `Show all images`
+        expandImagesLink.addEventListener("click", function(event){
+          event.preventDefault()
+          event.stopPropagation()
 
-        // expand all hidden rows
-        allRows.forEach((row) => {
-          row.classList.remove("hidden")
+          // expand all hidden rows
+          allRows.forEach((row) => {
+            row.classList.remove("hidden")
+          })
+
+          // hide expander
+          expandImagesDiv.innerHTML = ""
         })
 
-        // hide expander
-        expandImagesDiv.innerHTML = ""
-      })
-
-      if (rows.length > 1){
         expandImagesDiv.appendChild(expandImagesLink)
         gallery.appendChild(expandImagesDiv)
       }
@@ -100,7 +106,9 @@ class Gallery {
       let paddedImageIndex = (i).toString().padStart(2, "0")
 
       rows[row].push({
-        src: `/public/images/projects/${set}/slides/${paddedImageIndex}.jpg`
+        smallSrc: `/public/images/projects/${set}/small/${paddedImageIndex}.jpg`,
+        mediumSrc: `/public/images/projects/${set}/medium/${paddedImageIndex}.jpg`,
+        largeSrc: `/public/images/projects/${set}/large/${paddedImageIndex}.jpg`
       })
     }
     return rows
@@ -264,16 +272,29 @@ class Teal {
     }
   }
 
+  animateCourtain(){
+    courtain.classList.add("show")
+  }
+
   showPage(trigger, filter){
+    let courtain = document.querySelector("#courtain")
+
     // pause the homepage video when project is opened
     this.hero.pause()
+    courtain.classList.add("show")
 
-    if (this.currentContext === "project"){
-      this.body.classList.add("projectOpened")
-    } else {
-      this.body.classList.add("pageOpened")
-      this.attachPagesEvents()
-    }
+    setTimeout(() => {
+      if (this.currentContext === "project"){
+        this.body.classList.add("projectOpened")
+      } else {
+        this.body.classList.add("pageOpened")
+        this.attachPagesEvents()
+      }
+    }, 300)
+
+    setTimeout(() => {
+      courtain.classList.remove("show")
+    }, 2000)
 
     this.maskLogo(trigger)
     this.filterList(filter)

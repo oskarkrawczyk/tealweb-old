@@ -1,5 +1,20 @@
 @import "mixins";
 
+@keyframes showCourtain {
+  0% {
+    height: 0vh;
+    top: -100px;
+  }
+  50% {
+    height: 130vh;
+    top: -100px;
+  }
+  100% {
+    height: 0vh;
+    top: 130vh;
+  }
+}
+
 body {
   background: #fff;
   color: #222;
@@ -200,13 +215,14 @@ h2 {
   position: fixed;
   top: 0;
   right: 0;
-  width: 0vw;
+  width: 100vw;
   height: 100vh;
   // transition: width ease 0.5s;
-  will-change: width, background-color;
+  // will-change: width, background-color;
   overflow: hidden;
   background: #fff;
   pointer-events: none;
+  display: none;
 }
 
 body.pageOpened {
@@ -214,9 +230,8 @@ body.pageOpened {
 
   #page {
     pointer-events: auto;
-    width: 100vw;
-    height: 100vh;
     overflow: auto;
+    display: block;
   }
 }
 
@@ -225,9 +240,8 @@ body.projectOpened {
 
   #project {
     pointer-events: auto;
-    width: 100vw;
-    height: 100vh;
     overflow: auto;
+    display: block;
   }
 }
 
@@ -363,6 +377,23 @@ a {
   img {
     margin-top: 50px;
     width: 100%;
-    // clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 90%);
+  }
+}
+
+#courtain {
+  position: fixed;
+  top: -100px;
+  left: 0;
+  width: 100vw;
+  height: 0;
+  background: #27A0BF;
+  transform: skewY(6deg);
+  z-index: 100;
+
+  &.show {
+    pointer-events: none;
+    animation: showCourtain ease 1s;
+    // animation-iteration-count: 1;
+    // animation-fill-mode: forwards;
   }
 }

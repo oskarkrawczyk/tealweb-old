@@ -84,6 +84,28 @@ abbr, acronym {
 p {
   line-height: 1.42em; }
 
+@-webkit-keyframes showCourtain {
+  0% {
+    height: 0vh;
+    top: -100px; }
+  50% {
+    height: 130vh;
+    top: -100px; }
+  100% {
+    height: 0vh;
+    top: 130vh; } }
+
+@keyframes showCourtain {
+  0% {
+    height: 0vh;
+    top: -100px; }
+  50% {
+    height: 130vh;
+    top: -100px; }
+  100% {
+    height: 0vh;
+    top: 130vh; } }
+
 body {
   background: #fff;
   color: #222;
@@ -311,28 +333,26 @@ h2 {
   position: fixed;
   top: 0;
   right: 0;
-  width: 0vw;
+  width: 100vw;
   height: 100vh;
-  will-change: width, background-color;
   overflow: hidden;
   background: #fff;
-  pointer-events: none; }
+  pointer-events: none;
+  display: none; }
 
 body.pageOpened {
   overflow: hidden; }
   body.pageOpened #page {
     pointer-events: auto;
-    width: 100vw;
-    height: 100vh;
-    overflow: auto; }
+    overflow: auto;
+    display: block; }
 
 body.projectOpened {
   overflow: hidden; }
   body.projectOpened #project {
     pointer-events: auto;
-    width: 100vw;
-    height: 100vh;
-    overflow: auto; }
+    overflow: auto;
+    display: block; }
 
 #filters {
   position: absolute;
@@ -425,6 +445,21 @@ a {
   .aboutUsCont img {
     margin-top: 50px;
     width: 100%; }
+
+#courtain {
+  position: fixed;
+  top: -100px;
+  left: 0;
+  width: 100vw;
+  height: 0;
+  background: #27A0BF;
+  -webkit-transform: skewY(6deg);
+          transform: skewY(6deg);
+  z-index: 100; }
+  #courtain.show {
+    pointer-events: none;
+    -webkit-animation: showCourtain ease 1s;
+            animation: showCourtain ease 1s; }
 
 @charset "UTF-8";
 #project .mCont {
@@ -592,11 +627,13 @@ a {
   #project .galleryCont .galleryRow.hidden {
     display: none; }
 
-#project .galleryCont .galleryImage img {
-  display: block;
-  margin: 0;
-  width: 100%;
-  height: 100%; }
+#project .galleryCont .galleryImage {
+  display: block; }
+  #project .galleryCont .galleryImage img {
+    display: block;
+    margin: 0;
+    width: 100%;
+    height: 100%; }
 
 #project .galleryCont .galleryRow:not(:first-of-type) {
   margin: 1px 0 0 0; }
