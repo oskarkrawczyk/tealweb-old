@@ -1,3 +1,112 @@
+class Gallery {
+
+  constructor(galleryElements){
+    this.imagesPerRow = 4
+
+    this.buildElements(galleryElements)
+  }
+
+  getRatio(image, cb){
+    let tempImage = new Image()
+    tempImage.src = image.src
+    tempImage.addEventListener("load", function(){
+      let ratio = this.naturalWidth / this.naturalHeight
+      cb(ratio)
+    })
+  }
+
+  buildElements(galleries){
+    galleries.forEach((gallery, index) => {
+      let allRows = []
+      let rows = this.buildStructure(gallery)
+      let visibleRows = parseInt(gallery.dataset.imagesVisibleRows) || 1
+
+      gallery.innerHTML = ""
+
+      rows.forEach((row, index) => {
+        let hiddenRow = index >= visibleRows ? "hidden" : ""
+        let rowDiv = document.createElement("div")
+        rowDiv.setAttribute("class", `galleryRow ${hiddenRow}`)
+
+        allRows.push(rowDiv)
+
+        row.forEach((image) => {
+          let imgDiv = document.createElement("div")
+          imgDiv.setAttribute("class", "galleryImage")
+
+          let img = document.createElement("img")
+          img.setAttribute("src", image.src)
+
+          this.getRatio(image, (ratio) => {
+            imgDiv.style.flex = ratio
+            imgDiv.appendChild(img)
+            rowDiv.appendChild(imgDiv)
+          })
+        })
+
+        gallery.appendChild(rowDiv)
+      })
+
+      let expandImagesDiv = document.createElement("div")
+      expandImagesDiv.setAttribute("class", "expandImages")
+
+      let expandImagesLink = document.createElement("a")
+      expandImagesLink.setAttribute("href", "#")
+      expandImagesLink.innerText = `Show all images`
+      expandImagesLink.addEventListener("click", function(event){
+        event.preventDefault()
+        event.stopPropagation()
+
+        // expand all hidden rows
+        allRows.forEach((row) => {
+          row.classList.remove("hidden")
+        })
+
+        // hide expander
+        expandImagesDiv.innerHTML = ""
+      })
+
+      if (rows.length > 1){
+        expandImagesDiv.appendChild(expandImagesLink)
+        gallery.appendChild(expandImagesDiv)
+      }
+    })
+  }
+
+  buildStructure(gallery){
+    let rows    = []
+    let row     = 0
+    let counter = 0
+    let from    = parseInt(gallery.dataset.imagesFrom)
+    let to      = parseInt(gallery.dataset.imagesTo)
+    let set     = gallery.dataset.imagesSet
+
+    if (gallery.dataset.imagesPerRow){
+      this.imagesPerRow = parseInt(gallery.dataset.imagesPerRow)
+    }
+
+    for (var i = from; i <= to; i++){
+      if (counter === this.imagesPerRow){
+        row = row + 1
+        counter = 0
+      }
+
+      counter = counter + 1
+
+      if (!rows[row]){
+        rows[row] = []
+      }
+
+      let paddedImageIndex = (i).toString().padStart(2, "0")
+
+      rows[row].push({
+        src: `/public/images/projects/${set}/slides/${paddedImageIndex}.jpg`
+      })
+    }
+    return rows
+  }
+}
+
 class Teal {
 
   constructor(){
@@ -105,6 +214,10 @@ class Teal {
     }
   }
 
+  buildGallery(){
+    new Gallery(document.querySelectorAll(".galleryContainer"))
+  }
+
   fetchPage(trigger){
     let page    = trigger.dataset.page
     let url     = `/pages/${page}.html`
@@ -151,64 +264,40 @@ class Teal {
     }
   }
 
-  setPageColors(page){
-    let pageImage = page.querySelector(".imageCont img")
-
-    // change page colors based on the project image
-    if (pageImage){
-      let imageSrc = pageImage.src
-      let lightAccent
-
-      Vibrant.from(pageImage).getPalette((err, palette) => {
-        this.project.style.background = palette.DarkMuted.getHex()
-
-        // some images don't havve a LightMuted palette so we fall back to vibrant
-        if (palette.LightMuted) {
-          lightAccent = palette.LightMuted.getHex()
-        } else {
-          lightAccent = palette.LightVibrant.getHex()
-        }
-
-        this.project.querySelector(".pageHeader .back").style.stroke = lightAccent
-        this.project.querySelector(".pageHeader .logo").style.fill   = lightAccent
-        this.project.querySelector(".spacer").style.stroke           = lightAccent
-      })
-    } else {
-      this.page.style.background = "#fff"
-      this.page.querySelector(".pageHeader .back").style.stroke = "#27A0BF"
-      this.page.querySelector(".pageHeader .logo").style.fill   = "#27A0BF"
-      this.page.querySelector(".spacer").style.stroke           = "#F2F2F2"
-    }
-  }
-
   showPage(trigger, filter){
+    // pause the homepage video when project is opened
     this.hero.pause()
+
     if (this.currentContext === "project"){
       this.body.classList.add("projectOpened")
-      this.initSlider()
-
     } else {
       this.body.classList.add("pageOpened")
       this.attachPagesEvents()
     }
 
-    this.setPageColors(trigger)
+    this.maskLogo(trigger)
     this.filterList(filter)
+    this.buildGallery()
+    this.addHeroImagesRatio()
+  }
 
-    setTimeout(() => {
-      let items
-      if (this.currentContext === "project"){
-        items = this.project.querySelectorAll("#project h3, .meta span, .info p")
-      } else {
-        items = this.page.querySelectorAll("#project h3, .meta span, .info p")
-      }
+  maskLogo(trigger){
+    let cover = trigger.querySelector("img")
+    let logo = document.querySelector("#logo-clip")
+    logo.src = cover.src
+  }
 
-      Array.from(items).forEach((item, index) => {
-        setTimeout(() => {
-          item.classList.add("show")
-        }, 100 * index)
+  addHeroImagesRatio(){
+    let heroImages = document.querySelectorAll(".hiCont img")
+
+    heroImages.forEach(function(el){
+      let tempImage = new Image()
+      tempImage.src = el.src
+      tempImage.addEventListener("load", function(){
+        let ratio = this.naturalWidth / this.naturalHeight
+        el.parentNode.style.flex = ratio
       })
-    }, 700, this)
+    })
   }
 
   filterList(filter){
@@ -281,28 +370,8 @@ class Teal {
     }
   }
 
-  initSlider(){
-    $('.slider-nav').slick({
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      asNavFor: '.slider-for',
-      dots: false,
-      arrows: false,
-      centerMode: false,
-      focusOnSelect: true
-    })
-
-    $('.slider-for').slick({
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      arrows: true,
-      fade: true,
-      asNavFor: '.slider-nav',
-      respondTo: 'slider'
-    })
-  }
-
   hidePage(){
+    // unpause the homepage video when project is opened
     this.hero.play()
 
     if (this.currentContext === "project"){
@@ -312,10 +381,11 @@ class Teal {
       this.body.classList.remove("pageOpened")
     }
 
-    let items = this.page.querySelectorAll("#project h3, .meta span, .info p")
-    Array.from(items).forEach((item) => {
-      item.classList.remove("show")
-    })
+    // let items = this.page.querySelectorAll("#project h3, .meta span, .info p")
+    // Array.from(items).forEach((item) => {
+    //   item.classList.remove("show")
+    // })
+
     history.pushState({
       page: ""
     }, "Project", "/")

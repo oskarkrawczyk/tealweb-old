@@ -45,7 +45,8 @@ gulp.task("css", () => {
     .src([
       "public/scss/fonts.scss",
       "public/scss/reset.scss",
-      "public/scss/main.scss"
+      "public/scss/main.scss",
+      "public/scss/project.scss"
     ])
     .pipe(sass(options.sass).on("error", sass.logError))
     .pipe(autoprefixer(options.autoprefixer).on("error", handleError))
