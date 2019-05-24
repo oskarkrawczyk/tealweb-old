@@ -23,12 +23,15 @@ body {
 }
 
 header.site {
-  // background: gray;
-  margin: 20px 20px 0 0;
   position: relative;
-  height: 100vh;
+  height: 90vh;
+  width: 100%;
   overflow: hidden;
   clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 90%);
+
+  @media (max-width: 600px) {
+    height: 50vh;
+  }
 
   video {
     position: absolute;
@@ -39,6 +42,7 @@ header.site {
     object-fit: cover;
     width: 100%;
     height: 100%;
+    display: block;
   }
 }
 
@@ -46,6 +50,10 @@ h1 {
   a {
     display: inline-block;
     margin: 40px 70px;
+
+    @media (max-width: 600px) {
+      margin: 40px 20px;
+    }
   }
 
   svg {
@@ -63,6 +71,10 @@ nav {
   right: 50px;
   width: 400px;
   color: #fff;
+
+  @media (max-width: 600px) {
+    right: 20px;
+  }
 
   .tag {
     position: absolute;
@@ -113,6 +125,10 @@ h2 {
 .mCont {
   margin: 0 70px;
   position: relative;
+
+  @media (max-width: 984px) {
+    margin: 0 20px;
+  }
 }
 
 #our-recent-work,
@@ -129,6 +145,15 @@ h2 {
     font-weight: 600;
     line-height: 47px;
     letter-spacing: -2px;
+
+    @media (max-width: 600px) {
+      text-align: center;
+      padding-top: 20px;
+
+      br {
+        display: none;
+      }
+    }
   }
 
   ul {
@@ -137,6 +162,10 @@ h2 {
     right: 0;
     display: flex;
     justify-content: flex-end;
+
+    @media (max-width: 600px) {
+      display: none;
+    }
   }
 
   li {
@@ -153,18 +182,18 @@ h2 {
 
 #brands {
   ul {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-gap: 30px;
     max-width: 950px;
     margin: 0 auto;
   }
 
   li {
     padding: 30px 0;
-    width: 145px;
-    text-align: center;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   img {
@@ -217,8 +246,6 @@ h2 {
   right: 0;
   width: 100vw;
   height: 100vh;
-  // transition: width ease 0.5s;
-  // will-change: width, background-color;
   overflow: hidden;
   background: #fff;
   pointer-events: none;
@@ -242,6 +269,8 @@ body.projectOpened {
     pointer-events: auto;
     overflow: auto;
     display: block;
+    -webkit-overflow-scrolling: touch;
+
   }
 }
 
@@ -277,6 +306,7 @@ body.projectOpened {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   grid-gap: 60px;
+  position: relative;
 }
 
 a {
@@ -291,13 +321,19 @@ a {
 .workItem {
   width: 100%;
 
+  a {
+  }
+
   .imageCont {
     overflow: hidden;
+    // display: none;
   }
 
   img {
     display: block;
     width: 100%;
+    // display: none;
+
   }
 
   h3 {
@@ -307,11 +343,15 @@ a {
     color: #222;
     letter-spacing: 0;
     line-height: 1.2em;
+    // display: none;
+
   }
 
   ul {
     line-height: 1.45em;
     color: #aaa;
+    // display: none;
+
   }
 
   // &:nth-child(2n+2){
@@ -390,11 +430,79 @@ a {
   transform: skewY(6deg);
   z-index: 100;
   will-change: transform, height, top;
+  pointer-events: none;
 
   &.show {
-    pointer-events: none;
+    pointer-events: auto;
     animation: showCourtain ease 1s;
     // animation-iteration-count: 1;
     // animation-fill-mode: forwards;
+  }
+}
+
+#page {
+  &.commonPage {
+    color: #222;
+
+    .pageHeader {
+      margin-bottom: 40px;
+    }
+
+    .pageLogo {
+      .back {
+        position: relative;
+        top: -3px;
+        stroke: #222;
+      }
+
+      .logo {
+        margin-left: 15px;
+      }
+    }
+
+    .content {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100vw;
+      height: 100vh;
+      padding: 60px 70px 0 70px;
+      box-sizing: border-box;
+    }
+
+    h3 {
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 1.15em;
+      letter-spacing: -2px;
+      display: inline-block;
+      color: #222;
+    }
+
+    .workList {
+      h3 {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 1.2em;
+        letter-spacing: 0;
+        display: inline-block;
+      }
+    }
+
+    &.pageColors {
+      color: #222;
+
+      h3 {
+        color: #222;
+      }
+
+      main {
+        position: relative;
+
+        h3 {
+          margin-bottom: 45px;
+        }
+      }
+    } // .pageColors
   }
 }

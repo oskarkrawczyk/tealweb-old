@@ -2,8 +2,14 @@ class Gallery {
 
   constructor(galleryElements){
     this.imagesPerRow = 4
+    this.galleryElements = galleryElements
 
-    this.buildElements(galleryElements)
+    this.buildElements(this.galleryElements)
+  }
+
+  rebuild(rows){
+    this.imagesPerRow = rows
+    this.buildElements(this.galleryElements)
   }
 
   getRatio(image, cb){
@@ -180,38 +186,6 @@ class Teal {
     }
   }
 
-  // attachObserver(){
-  //   let observer
-  //   let targets = document.querySelectorAll(".workItem")
-  //   let options = {
-  //     root: null,
-  //     threshold: 0.99
-  //   }
-  //
-  //   let callback = (entries, observer) => {
-  //     entries.forEach(entry => {
-  //
-  //       if (entry.isIntersecting){
-  //         let items = entry.target.querySelectorAll("#project h3 span, ul span")
-  //
-  //         Array.from(items).forEach((item, index) => {
-  //           setTimeout(() => {
-  //             item.classList.add("show")
-  //           }, 100 * index)
-  //         })
-  //
-  //         observer.unobserve(entry.target)
-  //       }
-  //     })
-  //   }
-  //
-  //   observer = new IntersectionObserver(callback, options)
-  //
-  //   targets.forEach(target => {
-  //     observer.observe(target)
-  //   })
-  // }
-
   parseSlug(page){
     let filter = page.split("/").length >= 1 ? page.split("/")[1] : false
     let url = `/pages/${page.split("/")[0]}.html`
@@ -223,8 +197,24 @@ class Teal {
   }
 
   buildGallery(){
-    new Gallery(document.querySelectorAll(".galleryContainer"))
+    this.galleries = new Gallery(document.querySelectorAll(".galleryContainer"))
   }
+
+  // reflowGallery(width){
+  //
+  //   // if (width >= 984){
+  //   //   console.log("full")
+  //   // } else if (width <= 984 && width >= 600){
+  //   //   console.log("med")
+  //   // } else if (width <= 600){
+  //   //   console.log("small")
+  //   // }
+  //   console.log(width >= 600, width <= 590)
+  //   if (width <= 600 && width >= 599){
+  //     console.log("small")
+  //   }
+  //   // this.galleries.rebuild(rows)
+  // }
 
   fetchPage(trigger){
     let page    = trigger.dataset.page
@@ -436,5 +426,9 @@ class Teal {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  new Teal()
+  window.TealManager = new Teal()
 })
+
+// window.addEventListener("resize", (event) => {
+//   window.TealManager.reflowGallery(this.innerWidth)
+// })
