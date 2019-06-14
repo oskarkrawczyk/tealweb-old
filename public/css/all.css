@@ -368,7 +368,8 @@ body.pageOpened {
   body.pageOpened #page {
     pointer-events: auto;
     overflow: auto;
-    display: block; }
+    display: block;
+    -webkit-overflow-scrolling: touch; }
 
 body.projectOpened {
   overflow: hidden; }
@@ -384,6 +385,9 @@ body.projectOpened {
   right: 0;
   display: flex;
   justify-content: flex-end; }
+  @media (max-width: 600px) {
+    #filters {
+      display: none; } }
   #filters li {
     font-size: 20px;
     margin-left: 40px;
@@ -498,14 +502,20 @@ a {
     stroke: #222; }
   #page.commonPage .pageLogo .logo {
     margin-left: 15px; }
+  #page.commonPage .pageBody {
+    margin: 0 auto;
+    max-width: 984px;
+    margin-bottom: 45px; }
+    @media (max-width: 984px) {
+      #page.commonPage .pageBody {
+        margin-left: 20px;
+        margin-right: 20px; } }
   #page.commonPage .content {
     position: absolute;
     top: 0;
     right: 0;
     width: 100vw;
-    height: 100vh;
-    padding: 60px 70px 0 70px;
-    box-sizing: border-box; }
+    height: 100vh; }
   #page.commonPage h3 {
     font-size: 30px;
     font-weight: 600;
@@ -519,14 +529,10 @@ a {
     line-height: 1.2em;
     letter-spacing: 0;
     display: inline-block; }
-  #page.commonPage.pageColors {
-    color: #222; }
-    #page.commonPage.pageColors h3 {
-      color: #222; }
-    #page.commonPage.pageColors main {
-      position: relative; }
-      #page.commonPage.pageColors main h3 {
-        margin-bottom: 45px; }
+  #page.commonPage main {
+    position: relative; }
+    #page.commonPage main h3 {
+      margin-bottom: 45px; }
 
 @charset "UTF-8";
 #project .mCont {

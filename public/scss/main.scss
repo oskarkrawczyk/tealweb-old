@@ -259,6 +259,7 @@ body.pageOpened {
     pointer-events: auto;
     overflow: auto;
     display: block;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -270,7 +271,6 @@ body.projectOpened {
     overflow: auto;
     display: block;
     -webkit-overflow-scrolling: touch;
-
   }
 }
 
@@ -280,6 +280,10 @@ body.projectOpened {
   right: 0;
   display: flex;
   justify-content: flex-end;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 
   li {
     font-size: 20px;
@@ -311,7 +315,6 @@ body.projectOpened {
 
 a {
   color: #222;
-  // display: block;
 
   &:hover {
     text-decoration: none;
@@ -321,19 +324,13 @@ a {
 .workItem {
   width: 100%;
 
-  a {
-  }
-
   .imageCont {
     overflow: hidden;
-    // display: none;
   }
 
   img {
     display: block;
     width: 100%;
-    // display: none;
-
   }
 
   h3 {
@@ -343,21 +340,12 @@ a {
     color: #222;
     letter-spacing: 0;
     line-height: 1.2em;
-    // display: none;
-
   }
 
   ul {
     line-height: 1.45em;
     color: #aaa;
-    // display: none;
-
   }
-
-  // &:nth-child(2n+2){
-  //   position: relative;
-  //   top: 50px;
-  // }
 
   &.hidden {
     display: none;
@@ -435,8 +423,6 @@ a {
   &.show {
     pointer-events: auto;
     animation: showCourtain ease 1s;
-    // animation-iteration-count: 1;
-    // animation-fill-mode: forwards;
   }
 }
 
@@ -460,14 +446,25 @@ a {
       }
     }
 
+    .pageBody {
+      margin: 0 auto;
+      max-width: 984px;
+      margin-bottom: 45px;
+
+      @media (max-width: 984px) {
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+    }
+
     .content {
       position: absolute;
       top: 0;
       right: 0;
       width: 100vw;
       height: 100vh;
-      padding: 60px 70px 0 70px;
-      box-sizing: border-box;
+      // padding: 60px 70px 0 70px;
+      // box-sizing: border-box;
     }
 
     h3 {
@@ -489,20 +486,12 @@ a {
       }
     }
 
-    &.pageColors {
-      color: #222;
+    main {
+      position: relative;
 
       h3 {
-        color: #222;
+        margin-bottom: 45px;
       }
-
-      main {
-        position: relative;
-
-        h3 {
-          margin-bottom: 45px;
-        }
-      }
-    } // .pageColors
+    }
   }
 }
