@@ -290,6 +290,25 @@ class Teal {
     this.filterList(filter)
     this.buildGallery()
     this.addHeroImagesRatio()
+    this.initSectionIndex()
+  }
+
+  initSectionIndex(){
+    let sectionIndex = Array.from(document.querySelectorAll(".sectionsIndex a"))
+
+    if (sectionIndex){
+      for (let section of sectionIndex) {
+        let selector = `#${section.href.split("#").pop()}`
+        section.addEventListener("click", (event) => {
+          event.preventDefault()
+          event.stopPropagation()
+
+          document.querySelector(selector).scrollIntoView()
+        })
+        // let offsetTop = document.querySelector(selector).offsetTop
+        // document.querySelector("#project").offsetTop = 100
+      }
+    }
   }
 
   maskLogo(trigger){

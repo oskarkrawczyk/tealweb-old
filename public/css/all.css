@@ -106,6 +106,9 @@ p {
     height: 0vh;
     top: 130vh; } }
 
+html {
+  scroll-behavior: smooth; }
+
 body {
   background: #fff;
   color: #222;
@@ -495,7 +498,8 @@ a {
 #page.commonPage {
   color: #222; }
   #page.commonPage .pageHeader {
-    margin-bottom: 40px; }
+    margin: 40px auto 80px;
+    max-width: 984px; }
   #page.commonPage .pageLogo .back {
     position: relative;
     top: -3px;
