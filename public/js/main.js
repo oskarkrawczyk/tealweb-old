@@ -291,6 +291,8 @@ class Teal {
     this.buildGallery()
     this.addHeroImagesRatio()
     this.initSectionIndex()
+
+    ga('send', 'pageview');
   }
 
   initSectionIndex(){
