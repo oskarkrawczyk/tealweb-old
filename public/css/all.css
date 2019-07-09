@@ -620,7 +620,7 @@ a {
 #project .listing ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  grid-gap: 20px; }
+  grid-gap: 10px; }
 
 #project .listing li {
   line-height: 1.45em;
@@ -677,7 +677,7 @@ a {
 #project .sectionIntro .introTextCont {
   margin-bottom: 40px; }
   #project .sectionIntro .introTextCont p {
-    margin-bottom: 10px; }
+    margin-bottom: 15px; }
 
 #project .sectionIntro .heroImages {
   display: flex;

@@ -92,6 +92,7 @@ class Gallery {
     let from    = parseInt(gallery.dataset.imagesFrom)
     let to      = parseInt(gallery.dataset.imagesTo)
     let set     = gallery.dataset.imagesSet
+    let padBy   = parseInt(gallery.dataset.imagesPad) || 2
 
     if (gallery.dataset.imagesPerRow){
       this.imagesPerRow = parseInt(gallery.dataset.imagesPerRow)
@@ -109,7 +110,9 @@ class Gallery {
         rows[row] = []
       }
 
-      let paddedImageIndex = (i).toString().padStart(2, "0")
+      let paddedImageIndex = (i).toString().padStart(padBy, "0")
+
+      console.log(paddedImageIndex)
 
       rows[row].push({
         smallSrc: `/public/images/projects/${set}/small/${paddedImageIndex}.jpg`,
