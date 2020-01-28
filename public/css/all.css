@@ -610,12 +610,13 @@ a {
     margin-bottom: 10px; }
 
 #project .quote {
-  font-size: 23px;
+  font-size: 25px;
   text-align: center;
   letter-spacing: -1px;
   font-weight: 600;
-  line-height: 1.25em;
-  margin: 60px auto; }
+  line-height: 1.45em;
+  margin: 60px auto;
+  max-width: 55%; }
 
 #project .listing ul {
   display: grid;

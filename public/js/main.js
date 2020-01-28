@@ -92,6 +92,7 @@ class Gallery {
     let from    = parseInt(gallery.dataset.imagesFrom)
     let to      = parseInt(gallery.dataset.imagesTo)
     let set     = gallery.dataset.imagesSet
+    let dirSub  = gallery.dataset.imagesSetSub
     let padBy   = parseInt(gallery.dataset.imagesPad) || 2
 
     if (gallery.dataset.imagesPerRow){
@@ -112,12 +113,16 @@ class Gallery {
 
       let paddedImageIndex = (i).toString().padStart(padBy, "0")
 
-      console.log(paddedImageIndex)
+      // console.log(paddedImageIndex)
+
+      let sub = dirSub ? `${dirSub}/` : ""
+
+      console.log(dirSub)
 
       rows[row].push({
-        smallSrc: `/public/images/projects/${set}/small/${paddedImageIndex}.jpg`,
-        mediumSrc: `/public/images/projects/${set}/medium/${paddedImageIndex}.jpg`,
-        largeSrc: `/public/images/projects/${set}/large/${paddedImageIndex}.jpg`
+        smallSrc: `/public/images/projects/${set}/small/${sub}${paddedImageIndex}.jpg`,
+        mediumSrc: `/public/images/projects/${set}/medium/${sub}${paddedImageIndex}.jpg`,
+        largeSrc: `/public/images/projects/${set}/large/${sub}${paddedImageIndex}.jpg`
       })
     }
     return rows
