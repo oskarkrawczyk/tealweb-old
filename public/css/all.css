@@ -608,6 +608,11 @@ a {
           column-gap: 40px; }
   #project .intro p {
     margin-bottom: 10px; }
+  #project .intro.shortText {
+    -webkit-columns: 1;
+            columns: 1;
+    -webkit-column-gap: 0;
+            column-gap: 0; }
 
 #project .quote {
   font-size: 25px;

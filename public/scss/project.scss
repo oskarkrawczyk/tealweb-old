@@ -85,6 +85,11 @@
     p {
       margin-bottom: 10px;
     }
+
+    &.shortText {
+      columns: 1;
+      column-gap: 0;
+    }
   }
 
   .quote {
