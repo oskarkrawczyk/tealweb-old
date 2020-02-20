@@ -113,8 +113,9 @@ form {
   top: 30px;
   z-index: 10;
   background: rgba(255, 255, 255, 0.95); }
-  form fieldset {
+  form .fieldset {
     display: flex;
+    flex-direction: row;
     border-left: solid 1px rgba(0, 0, 0, 0.05);
     padding-left: 30px; }
   form p {

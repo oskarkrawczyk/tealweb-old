@@ -32,8 +32,9 @@ form {
   z-index: 10;
   background: rgba(#fff, 0.95);
 
-  fieldset {
+  .fieldset {
     display: flex;
+    flex-direction: row;
     border-left: solid 1px rgba(#000, 0.05);
     padding-left: 30px;
   }

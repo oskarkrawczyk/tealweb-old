@@ -55,7 +55,11 @@ class Filter {
 
       if (value){
         value = decodeURIComponent(value)
-        document.querySelector(`#filters select[name=${key}]`).value = value
+        let select = document.querySelector(`#filters select[name=${key}]`)
+
+        if (select){
+          select.value = value
+        }
       }
     })
   }
