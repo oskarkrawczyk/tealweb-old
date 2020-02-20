@@ -57,8 +57,24 @@ gulp.task("css", () => {
     }))
 })
 
+gulp.task("filter-css", () => {
+  return gulp
+    .src([
+      "public/scss/fonts.scss",
+      "public/scss/reset.scss",
+      "public/scss/filter.scss"
+    ])
+    .pipe(sass(options.sass).on("error", sass.logError))
+    .pipe(autoprefixer(options.autoprefixer).on("error", handleError))
+    .pipe(concat("filter.css").on("error", handleError))
+    .pipe(gulp.dest("public/css"))
+    .pipe(browserSync.reload({
+      stream: true
+    }))
+})
+
 gulp.task("watch", () => {
   browserSync.init(options.browsersync)
 
-  gulp.watch("public/scss/**/*.scss", ["css"])
+  gulp.watch("public/scss/**/*.scss", ["css", "filter-css"])
 })
