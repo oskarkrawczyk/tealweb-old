@@ -92,9 +92,11 @@ form {
     line-height: 1.35em;
     box-shadow: inset 0 0 0 1px rgba(#000, 0.05);
     transition: all 0.15s;
+    position: relative;
+    top: 0;
 
     &:hover {
-      transform: translateY(-3px);
+      top: -3px;
       box-shadow: inset 0 0 0 1px rgba(#000, 0.1), 0 5px 10px rgba(#000, 0.1);
     }
   }
@@ -106,10 +108,6 @@ form {
 
     &:hover {
       text-decoration: none;
-
-      h3 {
-        text-decoration: underline;
-      }
 
       em {
         background: rgba(#000, 0.15);
