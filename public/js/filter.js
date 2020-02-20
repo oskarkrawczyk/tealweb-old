@@ -1,10 +1,10 @@
 class Filter {
 
   constructor(data){
-    this.filters = document.querySelector("#filters .fieldset")
-    this.reset   = document.querySelector("#filters input[type=reset]")
-    this.results = document.querySelector("#results")
-    this.data    = data
+    this.filters    = document.querySelector("#filters .fieldset")
+    this.blankslate = document.querySelector("#blankslate")
+    this.results    = document.querySelector("#results")
+    this.data       = data
 
     // Array.from(this.filters).forEach((filter) => {
     //   filter.addEventListener("change", (event) => {
@@ -140,6 +140,20 @@ class Filter {
   filterProducts(products){
     let filteredResults = SEARCHJS.matchArray(this.data, this.decodeParams())
     this.results.innerHTML = this.buildGallery(filteredResults)
+
+    if (filteredResults.length > 0){
+      this.hideBlankslate()
+    } else {
+      this.showBlankslate()
+    }
+  }
+
+  hideBlankslate(){
+    this.blankslate.classList.remove("visible")
+  }
+
+  showBlankslate(){
+    this.blankslate.classList.add("visible")
   }
 
   buildGallery(products){
