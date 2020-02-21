@@ -200,6 +200,7 @@ class Filter {
           <section>
             <em>${product.Sezon}</em>
             <em>${product.Sektor}</em>
+            <em>${product.Index}</em>
           </section>
         </a>
       </li>`)
