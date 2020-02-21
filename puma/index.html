@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/public/css/filter.css">
 
     <script>
-    window.data = [
+    const productsData = [
       {
         "Index": "372185_01",
         "Nazwa": "Puma x Chinatown Market Future Rider",
@@ -127,7 +127,7 @@
 
     <script>
       window.addEventListener("DOMContentLoaded", () => {
-        new Filter(window.data)
+        new Filter(productsData)
       })
     </script>
   </head>
