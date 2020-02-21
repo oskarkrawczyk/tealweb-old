@@ -132,12 +132,13 @@ form {
       stroke: rgba(0, 0, 0, 0.1); }
   form label {
     margin-bottom: 5px; }
-  form select {
+  form select,
+  form input[type="text"] {
     width: 130px;
     padding: 0 5px;
     height: 30px;
     font-size: 13px;
-    background: transparent;
+    background: #fff;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
     border-radius: 3px;
     outline: none;
@@ -148,7 +149,8 @@ form {
             appearance: none;
     border: none;
     text-transform: capitalize; }
-    form select:focus {
+    form select:focus,
+    form input[type="text"]:focus {
       box-shadow: 0 0 0 2px #02858D; }
 
 #results {

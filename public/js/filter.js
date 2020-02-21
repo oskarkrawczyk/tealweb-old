@@ -18,7 +18,7 @@ class Filter {
 
     // ignore some columns from the JSON data
     let ignore  = [
-      "Index",
+      // "Index",
       "Nazwa",
       "Zdjęcie produktu", "Data (kiedy możemy to pokazać)"
     ]
@@ -27,7 +27,7 @@ class Filter {
 
     Object.keys(this.data[0]).forEach((filter) => {
       if (ignore.indexOf(filter) < 0){
-        selects[filter] = this.createFilterSelect(filter)
+        selects[filter] = this.createFilter(filter)
         store[filter] = []
 
         Object.keys(this.data).forEach((item) => {
@@ -76,28 +76,41 @@ class Filter {
     return tempColorStorage
   }
 
-  createFilterSelect(filter){
+  createFilter(filter){
     let p = document.createElement("p")
-    p.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9" /></svg>`
-
     let label = document.createElement("label")
     label.innerText = filter
+    let filterEl
 
-    let select = document.createElement("select")
-    select.name = filter
-    select.addEventListener("change", (event) => {
-      event.preventDefault()
-      event.stopPropagation()
+    if (filter === "Index"){
+      filterEl = document.createElement("input")
+      filterEl.name = filter
+      filterEl.type = "text"
+      filterEl.addEventListener("keyup", (event) => {
+        if (filterEl.value.length >= 3 || filterEl.value.length === 0){
+          history.pushState({}, "", this.getSelections())
+          this.filterProducts()
+        }
+      })
+    } else {
+      p.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9" /></svg>`
 
-      history.pushState({}, "", this.getSelections())
-      this.filterProducts()
-    })
+      filterEl = document.createElement("select")
+      filterEl.name = filter
+      filterEl.addEventListener("change", (event) => {
+        event.preventDefault()
+        event.stopPropagation()
+
+        history.pushState({}, "", this.getSelections())
+        this.filterProducts()
+      })
+    }
 
     p.appendChild(label)
-    p.appendChild(select)
+    p.appendChild(filterEl)
     this.filters.appendChild(p)
 
-    return select
+    return filterEl
   }
 
   ignoreExisting(arr, item){
@@ -107,10 +120,10 @@ class Filter {
   }
 
   getSelections(){
-    let all = document.querySelectorAll("#filters select")
+    let all = document.querySelectorAll("#filters select, #filters input")
     let out = []
     Array.from(all).forEach(function(el){
-      let value = el[el.selectedIndex].value
+      let value = el.selectedIndex ? el[el.selectedIndex].value : el.value
       if (value !== ""){
         out.push(`${el.name}=${value}`)
       }
@@ -126,9 +139,10 @@ class Filter {
     params.forEach((param) => {
       let key, value
       [key, value] = param.split("=")
-      if (key === "Kolor"){
-        decoded["_text"] = true
-      }
+      // if (key === "Kolor" || key === "Index"){
+      //   decoded["_text"] = true
+      // }
+      decoded["_text"] = true
 
       if (value){
         decoded[key] = decodeURIComponent(value)
@@ -146,7 +160,7 @@ class Filter {
 
       if (value){
         value = decodeURIComponent(value)
-        let select = document.querySelector(`#filters select[name=${key}]`)
+        let select = document.querySelector(`#filters *[name=${key}]`)
 
         if (select){
           select.value = value
