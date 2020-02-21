@@ -41,7 +41,9 @@ class Filter {
 
     // fill selects with options
     Object.keys(selects).forEach((selectFilter) => {
-      this.buildOptions(selects, selectFilter, store)
+      if (selectFilter !== "Index"){
+        this.buildOptions(selects, selectFilter, store)
+      }
     })
   }
 
